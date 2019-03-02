@@ -57,13 +57,6 @@ class Path(object):
         """Test whether a path exists in remote host. Returns True for broken symbolic links"""
         if self._msi.client.connected:
             return bool(self._msi.client.exec_command('[ -e {} ] && echo 1 || echo 0', simple=True))
-            # try:
-            #     lstat = self._msi.sftp.lstat(path)
-            #     while lstat == ecd.LIBSSH2_ERROR_EAGAIN:
-            #         lstat = self._msi.sftp.lstat(path)
-            #     return True
-            # except:
-            #     return False
         else:
             # Not connected to the server
             raise Exception('OfflineClientException')
